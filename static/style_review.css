@@ -1,0 +1,32 @@
+#comment-container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.comment {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+
+}
+
+.star_div {
+    flex: 1;
+    color: red;
+}
+
+.review_div {
+    flex: 2;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>영화 리뷰 사이트</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_main.css') }}">
+</head>
+<body>
+    <header>
+        <a href="main.html" id="title"><h1>영화 리뷰 사이트</h1></a>
+        
+    </header>
+
+    <main>
+        <ul id="movie-items" class="horizontal">
+            <li class="movie-item">
+                <a href="movie1.html">
+                <img src="{{ url_for('static', filename='1.jpg') }}" alt="영화 1 이미지">
+                <p>영화1</p></a>
+    
+            </li>
+            <li class="movie-item">
+                <a href="movie2.html">
+                <img src="{{ url_for('static', filename='2.jpg') }}" alt="영화 2 이미지">
+                <p>영화2</p></a>
+        
+            </li>
+            <li class="movie-item">
+                <a href="movie3.html">
+                <img src="{{ url_for('static', filename='3.jpg') }}" alt="영화 3 이미지">
+                <p>영화3</p></a>
+
+            </li>
+            <li class="movie-item">
+                <a href="movie4.html">
+                <img src="{{ url_for('static', filename='4.jpg') }}" alt="영화 4 이미지">
+                <p>영화4</p></a>
+   
+            </li>
+            <li class="movie-item">
+                <a href="movie5.html">
+                <img src="{{ url_for('static', filename='5.jpg') }}" alt="영화 5 이미지">
+                <p>영화5</p></a>
+
+            </li>
+        </ul>
+    </main>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 리뷰 사이트</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_movies.css') }}">
+</head>
+<body>
+    <header>
+        <a href="main.html" id="title"><h1>영화 리뷰 사이트</h1></a>
+    </header>
+
+    <main>
+        <ul id="movie-items" class="horizontal">
+            <li class="movie-item">
+                <div class="image-container">
+                <img src="{{ url_for('static', filename='4.jpg') }}" alt="영화 이미지"><br />
+                <div class="detail_container">
+                    <div id="movie_name"><br />영화4<br />
+                        Fourth movie</div><hr>
+                    <br />감독 : 손기완 <br />
+                    <br />배우 : 조민지 손기완 오진우 이태경 김진우 <br />
+                    <br />장르 : 코믹 / 정보 : 12세이상관람가, 100분, 한국 <br />
+                    <br />개봉 : 2023.11.23 <br />
+                    </div>
+                    </div>
+                    <br>
+                    <br><span style="font-size: 30px;">&lsquo;소개&rsquo;</span><br/>
+                    <br><strong>2023년, Fourth movie가 돌아온다!</strong> <br />
+                    <br />
+                    영화에 <br>
+                    관련한 <br>
+                    소개<br>
+                    <br /> 
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 후기</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_review.css') }}">
+</head>
+<body>
+    <div id="comment-container">
+        <h2>리뷰 후기</h2>
+        <textarea id="comment-input4" placeholder="리뷰를 입력하세요." class="comment-input"></textarea>
+        <button id="review-plus-button4" class="review-plus-button">리뷰 추가</button>
+        <ul id="comment-list4" class="comment-list"></ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        var star;
+        $(document).ready(function(){
+            $("#review-plus-button4").click(function(){
+                var commentInput = document.getElementById('comment-input4');
+                if (commentInput.value.trim() === '') {
+                    alert('리뷰를 입력하세요.');
+                    return;
+            }
+                var input_data = commentInput.value;
+
+                // 서버에 데이터 보내기
+                $.ajax({
+                    type: "POST",
+                    url: "/movie1.html",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({data:input_data}),
+                    success: function(res_data){
+                        console.log('suc',res_data.rating)
+                        // 별점 데이터 가져오기 (str)
+                        star=res_data.rating
+                        
+                        // 별점데이터 변환 (str->int)
+                        star_int = parseInt(star,10);
+                        
+                        // 리뷰 목록 부분
+                        var commentList = document.getElementById('comment-list4');
+
+                        // 리뷰 목록안에 리뷰한줄
+                        var commentItem = document.createElement('li');
+                        commentItem.className = 'comment';
+                        commentList.appendChild(commentItem);
+
+                        // 리뷰한줄안에 별점들어갈칸, 리뷰들어갈칸 두개의 칸 만들기
+                        var div_star = document.createElement('div');
+                        var div_review = document.createElement('div');
+
+                        div_star.className='star_div';
+                        div_review.className='review_div';
+
+                        div_star.textContent = '\u2605'.repeat(star_int);
+                        div_review.textContent = input_data
+
+                        commentItem.appendChild(div_star)
+                        commentItem.appendChild(div_review)
+
+                        commentInput.value = '';
+
+                    },
+                    error: function(err){
+                        console.log('err',err)
+                    }
+                });
+           
+            })
+        })
+    </script>
+</body>
+</html>
