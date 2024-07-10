@@ -23,7 +23,7 @@
 - `tensorflow 2.15.0`
 - **IDE** : Visual Studio Code (1.84.2)
 - **Framework** : Flask (2.2.2)
-
+<br/>
 
 ## 📌 주요 기능
 #### 프론트앤드
