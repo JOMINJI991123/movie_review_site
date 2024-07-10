@@ -4,23 +4,20 @@
 사용자가 입력한 리뷰데이터를 분석하여 자동으로 별점을 부여하여 리뷰를 등록하는 사이트
 
 ## 🕰️ 개발 기간
-* 22.04.26일 - 22.05.24일
+* 2023.9.1 - 2023.12.13
 
 ### 🧑‍🤝‍🧑 맴버구성
- - 팀장  : 이윤재 - 영화 예매, 영화 업로드, Database Script 제작, 통합 및 형상관리
- - 팀원1 : 채현우 - 로그인, 회원가입, ID찾기, PW찾기, 마이 페이지,메인 페이지, 통합 및 형상관리, PPT제작, 발표
- - 팀원2 : 이종원 - 메인 페이지, 메인 CSS
- - 팀원3 : 전성덕 - 1대1 문의 게시판(CRUD), 공지사항 게시판(CRUD)
- - 팀원4 : 김창훈 - 1대1 문의 게시판(CRUD), 공지사항 게시판(CRUD)
- - 팀원5 : 김성재 - 로그인, 회원가입, ID찾기, PW찾기
-
+ - 손기완(조장) : 모델 구현 및 튜닝, 팀 일정 조율
+ - 한진우 : ppt 및 보고서 문서 작성
+ - 이태경 : 웹 페이지 디자인 및 구현
+ - 조민지 : 서버 구현, 데이터 통신 및 처리
+   
 ### ⚙️ 개발 환경
-- `Java 8`
-- `JDK 1.8.0`
-- **IDE** : STS 3.9
-- **Framework** : Springboot(2.x)
-- **Database** : Oracle DB(11xe)
-- **ORM** : Mybatis
+- `Python 3.11.5`
+- `jQuery 3.6.4`
+- `tensorflow 2.15.0`
+- **IDE** : Visual Studio Code(1.84.2)
+- **Framework** : Flask(2.2.2)
 
 ## 📌 주요 기능
 #### 로그인 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login)" >상세보기 - WIKI 이동</a>
