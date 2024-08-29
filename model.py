@@ -60,5 +60,3 @@ with open("model_tokenizer.pkl", "wb") as f:
 
 
 
-
-
