@@ -2,13 +2,15 @@ import os
 import urllib.request
 import numpy as np
 import pickle
+import tensorflow
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, Bidirectional, LSTM, Dense, Dropout
 
-    
+print(tensorflow.__version__)
+
 # 데이터 다운로드 URL
 url = "https://github.com/e9t/nsmc/raw/master/ratings_train.txt"
 
@@ -52,10 +54,10 @@ model.add(Dense(1, activation='sigmoid'))
 class_weight = {0: 1, 1: len(y_train) / sum(y_train)}
 # 모델 컴파일 및 학습 (에포크 수 증가)
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-model.fit(X_train, y_train, epochs=1, batch_size=32, validation_data=(X_val, y_val))
+model.fit(X_train, y_train, epochs=10, batch_size=32, validation_data=(X_val, y_val))
 
-with open("model_tokenizer.pkl", "wb") as f:
-    pickle.dump((model, tokenizer), f)
+# with open("model_tokenizer.pkl", "wb") as f:
+#     pickle.dump((model, tokenizer), f)
 
 
 

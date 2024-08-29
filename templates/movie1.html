@@ -57,6 +57,34 @@
     <script>
         var star;
         $(document).ready(function(){
+            var movie_num = 1;
+            $.ajax({
+                type:"GET",
+                url: "/get_reviews/" + movie_num,
+                success: function(datas) {
+                    // 리뷰 목록 부분
+                    var commentList = document.getElementById('comment-list1');
+                    datas.forEach(function(data) {
+                        // 리뷰 목록안에 리뷰한줄
+                        var commentItem = document.createElement('li');
+                        commentItem.className = 'comment';
+                        commentList.appendChild(commentItem); 
+
+                        // 리뷰한줄안에 별점들어갈칸, 리뷰들어갈칸 두개의 칸 만들기
+                        var div_star = document.createElement('div');
+                        var div_review = document.createElement('div');
+
+                        div_star.className='star_div';
+                        div_review.className='review_div';
+
+                        div_star.textContent = '\u2605'.repeat(data.star);
+                        div_review.textContent = data.review
+
+                        commentItem.appendChild(div_star)
+                        commentItem.appendChild(div_review)
+                    })
+                }
+            })
             $("#review-plus-button1").click(function(){
                 var commentInput = document.getElementById('comment-input1');
                 if (commentInput.value.trim() === '') {
@@ -72,9 +100,9 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({data:input_data}),
                     success: function(res_data){
-                        console.log('suc',res_data.rating)
+                        console.log('suc',res_data.star)
                         // 별점 데이터 가져오기 (str)
-                        star=res_data.rating
+                        star=res_data.star
                         
                         // 별점데이터 변환 (str->int)
                         star_int = parseInt(star,10);
