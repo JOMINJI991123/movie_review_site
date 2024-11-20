@@ -15,24 +15,20 @@
         <ul id="movie-items" class="horizontal">
             <li class="movie-item">
                 <div class="image-container">
-                <img src="{{ url_for('static', filename='2.jpg') }}" alt="영화 이미지"><br />
+                <img src="{{ url_for('static', filename=movie_info.image_url) }}" alt="영화 이미지"><br />
                 <div class="detail_container">
-                    <div id="movie_name"><br />영화2<br />
-                        Second movie</div><hr>
-                    <br />감독 : 손기완 <br />
-                    <br />배우 : 조민지 손기완 오진우 이태경 김진우 <br />
-                    <br />장르 : 코믹 / 정보 : 12세이상관람가, 100분, 한국 <br />
-                    <br />개봉 : 2023.11.23 <br />
-                    </div>
-                    </div>
-                    <br>
-                    <br><span style="font-size: 30px;">&lsquo;소개&rsquo;</span><br/>
-                    <br><strong>2023년, Second movie가 돌아온다!</strong> <br />
-                    <br />
-                    영화에 <br>
-                    관련한 <br>
-                    소개<br>
-                    <br /> 
+                <div id="movie_name"><br />{{movie_info.title}}<br /></div><hr>
+                <br />감독 : {{movie_info.director}} <br />
+                <br />배우 : {{movie_info.actors}} <br />
+                <br />장르 : {{movie_info.genre}} <br />
+                <br />개봉 : {{movie_info.release_date}} <br />
+                </div>
+                </div>
+                <br>
+                <br><span style="font-size: 30px;">&lsquo;소개&rsquo;</span><br/>
+                <br />
+                {{movie_info.description}}
+                <br />
                 </li>
         </ul>
     </main>
@@ -41,7 +37,7 @@
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+ <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리뷰 후기</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style_review.css') }}">
@@ -49,21 +45,24 @@
 <body>
     <div id="comment-container">
         <h2>리뷰 후기</h2>
-        <textarea id="comment-input2" placeholder="리뷰를 입력하세요." class="comment-input"></textarea>
-        <button id="review-plus-button2" class="review-plus-button">리뷰 추가</button>
-        <ul id="comment-list2" class="comment-list"></ul>
+        <textarea id="comment-input1" placeholder="리뷰를 입력하세요." class="comment-input"></textarea>
+        <button id="review-plus-button1" class="review-plus-button">리뷰 추가</button>
+        <ul id="comment-list1" class="comment-list"></ul>
     </div>
+    <div id="movie-info" data-movie-info="{{movie_info | tojson | safe}}"></div>
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         var star;
+        console.log($('#movie-info').data('movie-info'))
         $(document).ready(function(){
-            var movie_num = 2;
+            var movie_info = JSON.parse($('#movie-info').data('movie-info'));
             $.ajax({
                 type:"GET",
-                url: "/get_reviews/" + movie_num,
+                url: "/get_reviews/" + movie_info.id,
                 success: function(datas) {
                     // 리뷰 목록 부분
-                    var commentList = document.getElementById('comment-list2');
+                    var commentList = document.getElementById('comment-list1');
                     datas.forEach(function(data) {
                         // 리뷰 목록안에 리뷰한줄
                         var commentItem = document.createElement('li');
@@ -85,18 +84,20 @@
                     })
                 }
             })
-            $("#review-plus-button2").click(function(){
-                var commentInput = document.getElementById('comment-input2');
+            $("#review-plus-button1").click(function(){
+                var commentInput = document.getElementById('comment-input1');
                 if (commentInput.value.trim() === '') {
                     alert('리뷰를 입력하세요.');
                     return;
             }
                 var input_data = commentInput.value;
 
+                url = "/movie" + movie_info.id + ".html"
+                console.log(url)
                 // 서버에 데이터 보내기
                 $.ajax({
                     type: "POST",
-                    url: "/movie2.html",
+                    url: "/movie" + movie_info.id + ".html",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({data:input_data}),
                     success: function(res_data){
@@ -108,7 +109,7 @@
                         star_int = parseInt(star,10);
                         
                         // 리뷰 목록 부분
-                        var commentList = document.getElementById('comment-list2');
+                        var commentList = document.getElementById('comment-list1');
 
                         // 리뷰 목록안에 리뷰한줄
                         var commentItem = document.createElement('li');
